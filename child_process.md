@@ -27,7 +27,7 @@
 ### child_process.exec(command[, options][, callback])
 
 * command `<string>` 要执行的命令，可以包含空格分隔的参数
-* options `<Object>` 
+* options `<Object>`
 	- cmd `<string>` 子进程执行的工作目录
 	- env `<object>` 环境变量的键值对
 	- encoding `<string>` 默认为`utf-8`
@@ -59,7 +59,7 @@ exec('cat *.js bad_file | wc -l', (error, stdout, stderr) => {
 		console.error(`exec error: ${error}`);
 		return;
 	}
-	
+
 	console.log(`stdout: ${stdout}`);
 	console.log(`stderr: ${stderr}`);
 });
@@ -111,7 +111,7 @@ lsExample();
 
 * modulePath `<string>` 子进程运行的模块
 * args `<Array>` 参数列表
-* options `<Object>` 
+* options `<Object>`
 	- cmd `<string>` 子进程执行的工作目录
 	- env `<object>` 环境变量的键值对
 	- execPath `<string>` 用于创建子进程的执行程序
@@ -132,7 +132,7 @@ lsExample();
 
 * command `<string>` 要运行的命令
 * args `<Array>` 运行参数
-* options `<Object>` 
+* options `<Object>`
 	- cmd `<string>` 子进程执行的工作目录
 	- env `<object>` 环境变量的键值对
 	- argv0 `<string>` 设置子进程的`argv[0]`值。如果不指定则为`command`的值
@@ -165,6 +165,8 @@ ls.on('close', (code) => {
 在Windows平台上，如果设置其为true，可以让子进程在父进程退出之后继续运行。子进程会有独立的命令行工作台。
 
 在非Windows平台上，如果设置其为true，子进程会创建一个新的进程组和会话。注意，在父进程退出后，子进程无论是否`detached`都可能继续运行。
+
+注：如果使用`detached`为true的选项，当父进程退出时子进程不会退出。但是当使用`kill`来杀死父进程时，无论`detached`为何值，子进程都不会退出。
 
 默认情况下，父进程会等待`detached`的子进程退出。要取消这个默认行为，可以使用`subprocess.unref()`方法。使用这个方法会导致父进程的事件循环中取消将子进程作为引用计数，从而导致父进程不用等待子进程的退出，除非在父子进程之间建立IPC通道。
 
